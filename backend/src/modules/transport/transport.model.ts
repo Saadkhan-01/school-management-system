@@ -1,0 +1,20 @@
+
+import mongoose, { Schema, type Document } from "mongoose";
+/** Transport (§21, §29) — Phase 8. NO live GPS tracking (forbidden without a real configured service; future extension). Capacity rule + document-expiry computation live in the service. Maintenance cost = integer minor units. */
+export interface IBus extends Document { name: string; registrationNumber: string; capacity: number; driverName: string; driverPhone: string; insuranceExpiry?: Date; registrationExpiry?: Date; fitnessExpiry?: Date; isActive: boolean; createdAt: Date; updatedAt: Date }
+const busSchema = new Schema<IBus>({ name: { type: String, required: true, trim: true, maxlength: 120 }, registrationNumber: { type: String, required: true, trim: true, maxlength: 40, unique: true }, capacity: { type: Number, required: true, min: 1, max: 200, validate: { validator: Number.isInteger, message: "Capacity must be an integer" } }, driverName: { type: String, required: true, trim: true, maxlength: 120 }, driverPhone: { type: String, required: true, trim: true, maxlength: 30 }, insuranceExpiry: { type: Date }, registrationExpiry: { type: Date }, fitnessExpiry: { type: Date }, isActive: { type: Boolean, default: true } }, { timestamps: true });
+export const Bus = (mongoose.models.Bus as mongoose.Model<IBus>) || mongoose.model<IBus>("Bus", busSchema);
+
+export interface IRoute extends Document { name: string; stops: string[]; createdAt: Date; updatedAt: Date }
+const routeSchema = new Schema<IRoute>({ name: { type: String, required: true, trim: true, maxlength: 120, unique: true }, stops: { type: [String], required: true, validate: { validator: (v: string[]) => v.length > 0, message: "A route needs at least one stop" } } }, { timestamps: true });
+export const TransportRoute = (mongoose.models.TransportRoute as mongoose.Model<IRoute>) || mongoose.model<IRoute>("TransportRoute", routeSchema);
+
+export const ALLOCATION_STATUSES = ["active","cancelled"] as const;
+export interface ITransportAllocation extends Document { student: mongoose.Types.ObjectId; route: mongoose.Types.ObjectId; bus: mongoose.Types.ObjectId; stop: string; session: mongoose.Types.ObjectId; status: (typeof ALLOCATION_STATUSES)[number]; createdAt: Date; updatedAt: Date }
+const allocSchema = new Schema<ITransportAllocation>({ student: { type: Schema.Types.ObjectId, ref: "Student", required: true, index: true }, route: { type: Schema.Types.ObjectId, ref: "TransportRoute", required: true, index: true }, bus: { type: Schema.Types.ObjectId, ref: "Bus", required: true, index: true }, stop: { type: String, required: true, trim: true, maxlength: 120 }, session: { type: Schema.Types.ObjectId, ref: "AcademicSession", required: true, index: true }, status: { type: String, enum: ALLOCATION_STATUSES, default: "active", index: true } }, { timestamps: true });
+allocSchema.index({ student: 1, session: 1 }, { unique: true, partialFilterExpression: { status: "active" }, name: "one_active_allocation_per_student_session" });
+export const TransportAllocation = (mongoose.models.TransportAllocation as mongoose.Model<ITransportAllocation>) || mongoose.model<ITransportAllocation>("TransportAllocation", allocSchema);
+
+export interface IMaintenanceRecord extends Document { bus: mongoose.Types.ObjectId; date: Date; type: string; cost: number; note?: string; recordedBy: mongoose.Types.ObjectId; createdAt: Date; updatedAt: Date }
+const maintSchema = new Schema<IMaintenanceRecord>({ bus: { type: Schema.Types.ObjectId, ref: "Bus", required: true, index: true }, date: { type: Date, required: true }, type: { type: String, required: true, trim: true, maxlength: 80 }, cost: { type: Number, required: true, min: 0, validate: { validator: Number.isInteger, message: "Cost must be integer minor units" } }, note: { type: String, trim: true, maxlength: 500 }, recordedBy: { type: Schema.Types.ObjectId, ref: "User", required: true } }, { timestamps: true });
+export const MaintenanceRecord = (mongoose.models.MaintenanceRecord as mongoose.Model<IMaintenanceRecord>) || mongoose.model<IMaintenanceRecord>("MaintenanceRecord", maintSchema);

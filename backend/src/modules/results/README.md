@@ -1,0 +1,1 @@
+# Results & Report Cards (§19) — implemented in the examinations module: ../examinations/results.routes.ts mounted at /api/v1/results (JSON report card + pdfkit PDF), workflow in ../examinations/exam.service.ts.

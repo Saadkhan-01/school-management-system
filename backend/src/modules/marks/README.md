@@ -1,0 +1,1 @@
+# Marks (§19) — implemented as part of the examinations module: see ../examinations/marks.model.ts, marks routes in ../examinations/marks.routes.ts (mounted at /api/v1/marks). Entry restricted to assigned teachers; obtainedMarks <= maxMarks enforced in the service (422).

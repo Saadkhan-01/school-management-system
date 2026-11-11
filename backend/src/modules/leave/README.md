@@ -1,0 +1,1 @@
+# Leave (§9/§11/§13) — Phase 5 implemented: LeaveApplication for staff self-leave and parent-for-child leave, Admin/Principal decisions, approved-leave visibility for attendance marking (GET /api/v1/attendance/approved-leaves and GET /api/v1/leave/approved). Mounted at /api/v1/leave.

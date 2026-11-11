@@ -1,0 +1,16 @@
+export const STUDENT_NAV = [
+  { to: '/student/dashboard', label: 'Dashboard', phase: 'P6' },
+  { to: '/student/timetable', label: 'My Timetable', phase: 'P6' },
+  { to: '/student/attendance', label: 'Attendance', phase: 'P6' },
+  { to: '/student/assignments', label: 'Assignments', phase: 'P6' },
+  { to: '/student/materials', label: 'Study Materials', phase: 'P6' },
+  { to: '/student/results', label: 'Exams & Results', phase: 'P6' },
+  { to: '/student/fees', label: 'Fees', phase: 'P7' },
+  { to: '/student/certificates', label: 'Certificates', phase: 'P8' },
+  { to: '/student/library', label: 'Library', phase: 'P8' },
+  { to: '/student/complaints', label: 'Complaints', phase: 'P8' },
+  { to: '/student/announcements', label: 'Announcements', phase: 'P6' },
+  { to: '/student/calendar', label: 'Calendar', phase: 'P9' },
+  { to: '/student/notifications', label: 'Notifications', phase: 'P9' },
+  { to: '/student/settings', label: 'Account Settings', phase: 'P6' },
+];

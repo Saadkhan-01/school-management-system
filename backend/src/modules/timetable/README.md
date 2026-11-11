@@ -1,0 +1,1 @@
+# Timetable (§18) — Phase 5 implemented: TimetableEntry CRUD (Admin writes), service-level conflict validation (teacher/classroom double-booking + duplicate class-period → 409 with specific codes) backed by unique indexes; by-class/by-teacher/by-student (via active enrollment) reads with role scoping. Files in this folder, mounted at /api/v1/timetable.

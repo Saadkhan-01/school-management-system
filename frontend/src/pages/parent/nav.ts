@@ -1,0 +1,16 @@
+export const PARENT_NAV = [
+  { to: '/parent/dashboard', label: 'Dashboard', phase: 'P6' },
+  { to: '/parent/attendance', label: 'Child Attendance', phase: 'P6' },
+  { to: '/parent/results', label: 'Results & Report Cards', phase: 'P6' },
+  { to: '/parent/assignments', label: 'Assignments & Feedback', phase: 'P6' },
+  { to: '/parent/timetable', label: 'Child Timetable', phase: 'P6' },
+  { to: '/parent/leave', label: 'Leave Applications', phase: 'P6' },
+  { to: '/parent/fees', label: 'Fees & Payments', phase: 'P7' },
+  { to: '/parent/transport', label: 'Transport', phase: 'P8' },
+  { to: '/parent/complaints', label: 'Complaints', phase: 'P8' },
+  { to: '/parent/announcements', label: 'Announcements', phase: 'P6' },
+  { to: '/parent/messages', label: 'Messages', phase: 'P9' },
+  { to: '/parent/calendar', label: 'Calendar', phase: 'P9' },
+  { to: '/parent/notifications', label: 'Notifications', phase: 'P9' },
+  { to: '/parent/settings', label: 'Account Settings', phase: 'P6' },
+];

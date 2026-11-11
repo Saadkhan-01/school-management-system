@@ -1,0 +1,1 @@
+# Examinations (§19) — Phase 5 implemented: Exam + ExamSchedule + Marks (marks.model.ts) + result workflow (approve/publish) + report-card computation and a real pdfkit report-card PDF (reportCardPdf.ts). Routes: exam.routes.ts (/exams), marks.routes.ts (/marks), results.routes.ts (/results). Unpublished results return 404 to students/parents.
